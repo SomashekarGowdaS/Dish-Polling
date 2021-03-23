@@ -9,7 +9,7 @@ const Results = (props) => {
     });
 
     const getSortedDishes = () => {
-        const sortedDishes = _.orderBy(dishesState, ['totalPoints']);
+        const sortedDishes = _.orderBy(dishesState, ['totalPoints'], ['desc']);
         return sortedDishes;
     }
 
@@ -20,7 +20,7 @@ const Results = (props) => {
             ) : (
                 <>
                     { getSortedDishes().map(dish => {
-                        return <Dish key={dish.dishId} {...dish} enableVoting={false} />
+                        return <Dish key={dish.dishId} {...dish} />
                     })}
                 </>
             )}

@@ -47,14 +47,16 @@ const AddDish = (props) => {
             createdBy: loggedUser.userId,
             dishTitle: data.dishOneTitle,
             dishDescription: data.dishOneDescription,
-            totalPoints: 0
+            totalPoints: 0,
+            votedBy: []
         }
         const formDataTwo = {
             dishId: v4(),
             createdBy: loggedUser.userId,
             dishTitle: data.dishTwoTitle,
             dishDescription: data.dishTwoDescription,
-            totalPoints: 0
+            totalPoints: 0,
+            votedBy: []
         }
         dispatch(startAddDishes(formDataOne, formDataTwo));
         alert('Dish Added');
