@@ -34,13 +34,6 @@ const AddDish = (props) => {
         setSelectedUserDishes(selectedUserDishes);
     }, []);
 
-    // const setSelectedDishes = () => {
-    //     const selectedUserDishes = dishes.filter(dish => {
-    //         return dish.createdBy === loggedUser.userId;
-    //     });
-    //     setSelectedUserDishes(selectedUserDishes);
-    // }
-
     const formFields = [
         { type: 'text', name: 'dishOneTitle', placeholder: 'Dish One Title', register, error: errors.dishOneTitle ? errors.dishOneTitle : {} },
         { type: 'textarea', name: 'dishOneDescription', placeholder: 'Dish One Description', register, error: errors.dishOneDescription ? errors.dishOneDescription : {} },
@@ -53,13 +46,15 @@ const AddDish = (props) => {
             dishId: v4(),
             createdBy: loggedUser.userId,
             dishTitle: data.dishOneTitle,
-            dishDescription: data.dishOneDescription
+            dishDescription: data.dishOneDescription,
+            totalPoints: 0
         }
         const formDataTwo = {
             dishId: v4(),
             createdBy: loggedUser.userId,
             dishTitle: data.dishTwoTitle,
-            dishDescription: data.dishTwoDescription
+            dishDescription: data.dishTwoDescription,
+            totalPoints: 0
         }
         dispatch(startAddDishes(formDataOne, formDataTwo));
         alert('Dish Added');
@@ -77,7 +72,7 @@ const AddDish = (props) => {
                         {formFields.map(field => (
                             <FormFields key={field.name} {...field} />
                         ))}
-                        <input type="submit" value="Add Dish" />
+                        <input type="submit" value="Submit Dishes" />
                     </form>
                 </div>
             )}

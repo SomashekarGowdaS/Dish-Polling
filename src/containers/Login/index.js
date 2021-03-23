@@ -30,12 +30,15 @@ const Login = (props) => {
     }
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} >
-            {formFields.map(field => (
-                <FormFields key={field.name} {...field} />
-            ))}
-            <input type="submit" value="Login" />
-        </form>
+        <div>
+            <h1> Login </h1>
+            <form onSubmit={handleSubmit(onSubmit)} >
+                {formFields.map(field => (
+                    <FormFields key={field.name} {...field} />
+                ))}
+                <input type="submit" value="Login" />
+            </form>
+        </div>
     )
 }
 

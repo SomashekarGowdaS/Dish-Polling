@@ -2,11 +2,11 @@ import { startClearDish } from "./dishesActions";
 
 export const startCreatePoll = (id) => {
     return (dispatch) => {
-        dispatch(createPoll(id));
         localStorage.setItem('poll', JSON.stringify({
             pollCreated: true,
             createdBy: id
         }));
+        dispatch(createPoll(id));
         alert('Poll Created');
     }
 }
@@ -21,12 +21,12 @@ export const createPoll = (id) => {
 export const startEndPoll = () => {
     return (dispatch) => {
         if (window.confirm('Are you sure?')) {
-            dispatch(endPoll());
-            dispatch(startClearDish());
             localStorage.setItem('poll', JSON.stringify({
                 pollCreated: false,
                 createdBy: null
             }));
+            dispatch(endPoll());
+            dispatch(startClearDish());
             alert('Poll Ended');
         }
     }

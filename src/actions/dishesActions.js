@@ -2,8 +2,8 @@
 export const startAddDishes = (dishOne, dishTwo) => {
     return (dispatch, getState) => {
         const dishes = getState().dishes;
-        dispatch(addDishes([dishOne, dishTwo]));
         localStorage.setItem('dishes', JSON.stringify([...dishes, dishOne, dishTwo]));
+        dispatch(addDishes([dishOne, dishTwo]));
     }
 }
 
@@ -16,8 +16,8 @@ export const addDishes = (dishes) => {
 
 export const startClearDish = () => {
     return (dispatch) => {
-        dispatch(clearDishes());
         localStorage.removeItem('dishes');
+        dispatch(clearDishes());
     }
 }
 

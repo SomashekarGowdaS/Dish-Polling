@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { startLogout } from '../../actions/loginActions';
 import { startCreatePoll, startEndPoll } from '../../actions/pollActions';
 import AddDish from './AddDish';
+import VoteDishes from './VoteDishes';
 
 
 const PollsContainer = (props) => {
@@ -15,10 +16,6 @@ const PollsContainer = (props) => {
     });
     const dispatch = useDispatch();
 
-    const handleLogout = () => {
-        dispatch(startLogout(props.history.push));
-    }
-
     const handleCreatePoll = () => {
         dispatch(startCreatePoll(loggedUser.userId));
     }
@@ -29,9 +26,6 @@ const PollsContainer = (props) => {
 
     return (
         <div>
-            <ul>
-                <li onClick={handleLogout} > <Link to='#' > Logout </Link> </li>
-            </ul>
             { poll.pollCreated ? (
                 <div>
                     <p> Poll Created </p>
@@ -44,6 +38,8 @@ const PollsContainer = (props) => {
                     <p> Create poll to add dishes </p>
                 </div>
             )}
+            <hr />
+            <VoteDishes />
         </div>
     )
 }
