@@ -26,3 +26,17 @@ export const clearDishes = () => {
         type: 'CLEAR_DISHES'
     }
 }
+
+export const startUpdateDishes = (payload) => {
+    return (dispatch) => {
+        localStorage.setItem('dishes', JSON.stringify([...payload]));
+        dispatch(updateDishes(payload));
+    }
+}
+
+export const updateDishes = (payload) => {
+    return {
+        type: 'UPDATE_DISHES',
+        payload
+    }
+}

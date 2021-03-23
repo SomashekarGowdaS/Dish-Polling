@@ -8,6 +8,9 @@ const dishesReducer = (state = initialState, action) => {
         case 'CLEAR_DISHES': {
             return [];
         }
+        case 'UPDATE_DISHES': {
+            return action.payload
+        }
         default: {
             return [...state];
         }
