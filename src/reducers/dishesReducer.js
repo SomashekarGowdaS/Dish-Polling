@@ -6,10 +6,10 @@ const dishesReducer = (state = initialState, action) => {
             return [...state, ...action.payload];
         }
         case 'CLEAR_DISHES': {
-            return [];
+            return [...initialState];
         }
         case 'UPDATE_DISHES': {
-            return action.payload
+            return action.payload;
         }
         default: {
             return [...state];

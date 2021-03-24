@@ -1,7 +1,5 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { startLogout } from '../../actions/loginActions';
 import { startCreatePoll, startEndPoll } from '../../actions/pollActions';
 import AddDish from './AddDish';
 import VoteDishes from './VoteDishes';

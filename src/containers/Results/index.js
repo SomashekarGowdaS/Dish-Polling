@@ -8,9 +8,34 @@ const Results = (props) => {
         return state.dishes;
     });
 
+    const loggedUser = useSelector((state) => {
+        return state.users.loggedUser;
+    });
+
     const getSortedDishes = () => {
-        const sortedDishes = _.orderBy(dishesState, ['totalPoints'], ['desc']);
+        let dishesStateClone = [...dishesState]
+        for (let i = 0; i < dishesState.length; i++) {
+            const votedByPoints = dishesState[i].votedBy.map(item => item.assignedPoint);
+            let total = 0;
+            //Filtering truthy values
+            const filteredPoints = votedByPoints.length && votedByPoints.filter(item => item)
+            if (filteredPoints.length) {
+                total = filteredPoints.length > 1 ? filteredPoints.reduce((total, num) => Number(total) + Number(num)) : filteredPoints[0]
+            }
+            dishesStateClone[i].totalPoints = total;
+        }
+        const sortedDishes = _.orderBy(dishesStateClone, ['totalPoints'], ['desc']);
         return sortedDishes;
+    }
+
+    const isSelectedByUser = (dish) => {
+        let isSelected = false;
+        dish.votedBy.forEach(votedDish => {
+            if ((votedDish.userId === loggedUser.userId) && votedDish.assignedPoint) {
+                isSelected = true;
+            }
+        })
+        return isSelected;
     }
 
     return (
@@ -20,7 +45,10 @@ const Results = (props) => {
             ) : (
                 <>
                     { getSortedDishes().map(dish => {
-                        return <Dish key={dish.dishId} {...dish} />
+                        return <div key={dish.dishId} >
+                            {isSelectedByUser(dish) && <p> your selection </p>}
+                            <Dish {...dish} isResult />
+                        </div>
                     })}
                 </>
             )}

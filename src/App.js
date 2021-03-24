@@ -19,7 +19,7 @@ function App(props) {
 
   return (
     <div>
-      { Object.keys(loggedUser).length != 0 && <ul>
+      { Object.keys(loggedUser).length !== 0 && <ul>
         <li onClick={handleLogout} > <Link to='#' > Logout </Link> </li>
         <li> <Link to='/polls' > Dishes </Link> </li>
         <li> <Link to='/results' > Results </Link> </li>

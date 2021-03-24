@@ -38,7 +38,7 @@ const AddDish = (props) => {
             return dish.createdBy === loggedUser.userId;
         });
         setSelectedUserDishes(selectedUserDishes);
-    }, []);
+    }, [dishes, loggedUser.userId]);
 
     const formFieldsForDishOne = [
         { type: 'text', name: 'dishOneTitle', placeholder: 'Dish One Title', register, error: errors.dishOneTitle ? errors.dishOneTitle : {} },
@@ -63,6 +63,7 @@ const AddDish = (props) => {
     const onSubmit = (data) => {
         const formDataOne = {
             dishId: v4(),
+            dishImage: imgSrcDishOne,
             createdBy: loggedUser.userId,
             dishTitle: data.dishOneTitle,
             dishDescription: data.dishOneDescription,
@@ -71,6 +72,7 @@ const AddDish = (props) => {
         }
         const formDataTwo = {
             dishId: v4(),
+            dishImage: imgSrcDishTwo,
             createdBy: loggedUser.userId,
             dishTitle: data.dishTwoTitle,
             dishDescription: data.dishTwoDescription,
@@ -78,7 +80,7 @@ const AddDish = (props) => {
             votedBy: []
         }
         dispatch(startAddDishes(formDataOne, formDataTwo));
-        alert('Dish Added');
+        alert('Dishes Added');
         setSelectedUserDishes([...selectedUserDishes, formDataOne, formDataTwo]);
     }
 
@@ -93,11 +95,10 @@ const AddDish = (props) => {
                         {enableCameraforDishOne ? (
                             <Camera
                                 onTakePhoto={(dataUri) => { handleTakePhotoforDishOne(dataUri) }}
-                                onCameraStop={() => { console.log('stop') }}
                             />
                         ) : (
                             <div>
-                                <img src={imgSrcDishOne} width="100" height="100" />
+                                <img alt="dish1" src={imgSrcDishOne} width="100" height="100" />
                                 <button onClick={() => {
                                     setEnableCameraforDishOne(true);
                                 }} >Take Photo</button>
@@ -114,7 +115,7 @@ const AddDish = (props) => {
                             />
                         ) : (
                             <div>
-                                <img src={imgSrcDishTwo} width="100" height="100" />
+                                <img alt="dish2" src={imgSrcDishTwo} width="100" height="100" />
                                 <button onClick={() => {
                                     setEnableCameraforDishTwo(true);
                                 }} >Take Photo</button>
