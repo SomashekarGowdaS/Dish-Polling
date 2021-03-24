@@ -25,8 +25,8 @@ export const setLoggedUser = (user) => {
 export const startLogout = (navigate) => {
     return (dispatch) => {
         if (window.confirm('Are you sure?')) {
-            localStorage.removeItem('loggedUser');
             dispatch(removeLoggedUser());
+            localStorage.removeItem('loggedUser');
             navigate('/');
         }
     }

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { startUpdateDishes } from '../../../actions/dishesActions';
 import Dish from '../Dish';
+import Card from '../../../components/Card'
 
 const VoteDishes = (props) => {
     const dispatch = useDispatch()
@@ -98,6 +99,7 @@ const VoteDishes = (props) => {
 
     return (
         <div>
+            <Card />
             { dishes.length === 0 ? (
                 <p> No Dishes Available </p>
             ) : (
