@@ -22,6 +22,13 @@ const useStyles = makeStyles({
     root: {
         textAlign: 'center'
     },
+    innerEle: {
+        display: 'inline-block',
+        margin: '10px'
+    },
+    outerEle: {
+        display: 'block'
+    }
 });
 
 const AddDish = (props) => {
@@ -98,47 +105,51 @@ const AddDish = (props) => {
             { selectedUserDishes.length >= 2 ? (
                 <p> Maximum number of dishes added </p>
             ) : (
-                <div>
+                <div >
                     <h1> Add Dish </h1>
-                    <form onSubmit={handleSubmit(onSubmit)} >
-                        {enableCameraforDishOne ? (
-                            <Camera
-                                onTakePhoto={(dataUri) => { handleTakePhotoforDishOne(dataUri) }}
-                            />
-                        ) : (
-                            <div>
-                                { imgSrcDishOne && <img alt="dish1" src={imgSrcDishOne} width="100" height="100" />}
-                                <Button variant="contained" onClick={() => {
-                                    setEnableCameraforDishOne(true);
-                                }} >
-                                    Take Photo
+                    <form onSubmit={handleSubmit(onSubmit)} className={classes.outerEle} >
+                        <div className={classes.innerEle} >
+                            {enableCameraforDishOne ? (
+                                <Camera
+                                    onTakePhoto={(dataUri) => { handleTakePhotoforDishOne(dataUri) }}
+                                />
+                            ) : (
+                                <div >
+                                    { imgSrcDishOne && <img alt="dish1" src={imgSrcDishOne} width="100" height="100" />}
+                                    <Button variant="contained" onClick={() => {
+                                        setEnableCameraforDishOne(true);
+                                    }} >
+                                        Take Photo
                                 </Button>
-                            </div>
-                        )}
-                        {formFieldsForDishOne.map(field => (
-                            <div key={field.name} >
-                                <FormFields {...field} />
-                            </div>
-                        ))}
-                        {enableCameraforDishTwo ? (
-                            <Camera
-                                onTakePhoto={(dataUri) => { handleTakePhotoforDishTwo(dataUri); }}
-                            />
-                        ) : (
-                            <div>
-                                { imgSrcDishTwo && <img alt="dish2" src={imgSrcDishTwo} width="100" height="100" />}
-                                <Button variant="contained" onClick={() => {
-                                    setEnableCameraforDishTwo(true);
-                                }} >
-                                    Take Photo
+                                </div>
+                            )}
+                            {formFieldsForDishOne.map(field => (
+                                <div key={field.name} >
+                                    <FormFields {...field} />
+                                </div>
+                            ))}
+                        </div>
+                        <div className={classes.innerEle} >
+                            {enableCameraforDishTwo ? (
+                                <Camera
+                                    onTakePhoto={(dataUri) => { handleTakePhotoforDishTwo(dataUri); }}
+                                />
+                            ) : (
+                                <div>
+                                    { imgSrcDishTwo && <img alt="dish2" src={imgSrcDishTwo} width="100" height="100" />}
+                                    <Button variant="contained" onClick={() => {
+                                        setEnableCameraforDishTwo(true);
+                                    }} >
+                                        Take Photo
                                 </Button>
-                            </div>
-                        )}
-                        {formFieldsForDishTwo.map(field => (
-                            <div key={field.name} >
-                                <FormFields {...field} />
-                            </div>
-                        ))}
+                                </div>
+                            )}
+                            {formFieldsForDishTwo.map(field => (
+                                <div key={field.name} >
+                                    <FormFields {...field} />
+                                </div>
+                            ))}
+                        </div>
                         <Button variant="contained" color="primary" type="submit">
                             Submit Dishes
                         </Button>
