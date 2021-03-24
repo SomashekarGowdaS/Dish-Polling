@@ -1,9 +1,21 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
 import { startUpdateDishes } from '../../../actions/dishesActions';
 import Card from '../../../components/Card'
 
+const useStyles = makeStyles({
+    root: {
+        textAlign: 'center'
+    },
+    block: {
+        display: 'block'
+    }
+});
+
 const VoteDishes = (props) => {
+    const classes = useStyles();
     const dispatch = useDispatch()
     const dishesState = useSelector((state) => {
         return state.dishes;
@@ -59,7 +71,8 @@ const VoteDishes = (props) => {
             delete dishesClone[index].assignedPoint
         });
 
-        dispatch(startUpdateDishes(dishesClone))
+        dispatch(startUpdateDishes(dishesClone));
+        alert('Selections Submitted');
     }
 
     const handleChange = (value, dishId) => {
@@ -101,13 +114,19 @@ const VoteDishes = (props) => {
             { dishes.length === 0 ? (
                 <p> No Dishes Available </p>
             ) : (
-                <div>
-                    {dishes.map(dish => {
-                        return <Card dish={dish} checkIfVoted={checkIfVoted} options={options} isCurrentUserVoted={isCurrentUserVoted} handleChange={handleChange} />
-                    })}
-                    <button onClick={() => onSubmit()}>Submit</button>
-                    <button onClick={() => toggleEdit()}>Edit</button>
-                </div>
+                <>
+                    <div className={classes.block} >
+                        {dishes.map(dish => {
+                            return <Card dish={dish} checkIfVoted={checkIfVoted} options={options} isCurrentUserVoted={isCurrentUserVoted} handleChange={handleChange} />
+                        })}
+                    </div>
+                    <Button variant="contained" color="primary" onClick={() => onSubmit()} >
+                        Submit
+                    </Button>
+                    <Button variant="contained" onClick={() => toggleEdit()} >
+                        Edit
+                    </Button>
+                </>
             )}
         </div>
     )

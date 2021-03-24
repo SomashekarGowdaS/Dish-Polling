@@ -3,7 +3,9 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from '@hookform/resolvers/yup';
 import Camera from 'react-html5-camera-photo';
+import { makeStyles } from '@material-ui/core/styles';
 import 'react-html5-camera-photo/build/css/index.css';
+import Button from '@material-ui/core/Button';
 import FormFields from '../../../components/FormFields';
 import { v4 } from 'uuid';
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,7 +18,14 @@ const schema = yup.object().shape({
     dishTwoDescription: yup.string().required('*Enter Description')
 });
 
+const useStyles = makeStyles({
+    root: {
+        textAlign: 'center'
+    },
+});
+
 const AddDish = (props) => {
+    const classes = useStyles();
     const { register, handleSubmit, errors, control } = useForm({
         resolver: yupResolver(schema),
     });
@@ -85,12 +94,12 @@ const AddDish = (props) => {
     }
 
     return (
-        <div>
+        <div className={classes.root} >
             { selectedUserDishes.length >= 2 ? (
                 <p> Maximum number of dishes added </p>
             ) : (
                 <div>
-                    <h3> Add Dish </h3>
+                    <h1> Add Dish </h1>
                     <form onSubmit={handleSubmit(onSubmit)} >
                         {enableCameraforDishOne ? (
                             <Camera
@@ -98,10 +107,12 @@ const AddDish = (props) => {
                             />
                         ) : (
                             <div>
-                                <img alt="dish1" src={imgSrcDishOne} width="100" height="100" />
-                                <button onClick={() => {
+                                { imgSrcDishOne && <img alt="dish1" src={imgSrcDishOne} width="100" height="100" />}
+                                <Button variant="contained" onClick={() => {
                                     setEnableCameraforDishOne(true);
-                                }} >Take Photo</button>
+                                }} >
+                                    Take Photo
+                                </Button>
                             </div>
                         )}
                         {formFieldsForDishOne.map(field => (
@@ -115,10 +126,12 @@ const AddDish = (props) => {
                             />
                         ) : (
                             <div>
-                                <img alt="dish2" src={imgSrcDishTwo} width="100" height="100" />
-                                <button onClick={() => {
+                                { imgSrcDishTwo && <img alt="dish2" src={imgSrcDishTwo} width="100" height="100" />}
+                                <Button variant="contained" onClick={() => {
                                     setEnableCameraforDishTwo(true);
-                                }} >Take Photo</button>
+                                }} >
+                                    Take Photo
+                                </Button>
                             </div>
                         )}
                         {formFieldsForDishTwo.map(field => (
@@ -126,7 +139,9 @@ const AddDish = (props) => {
                                 <FormFields {...field} />
                             </div>
                         ))}
-                        <input type="submit" value="Submit Dishes" />
+                        <Button variant="contained" color="primary" type="submit">
+                            Submit Dishes
+                        </Button>
                     </form>
                 </div>
             )}

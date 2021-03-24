@@ -1,8 +1,16 @@
 import React, { Fragment } from 'react'
 import { Controller } from "react-hook-form";
 import { Input } from "@material-ui/core";
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles({
+    errorMessage: {
+        color: 'red'
+    },
+});
 
 const FormFields = (props) => {
+    const classes = useStyles();
     const { type, name, placeholder, register, error, label, options, control } = props;
     const getField = () => {
         switch (type) {
@@ -10,7 +18,7 @@ const FormFields = (props) => {
                 <Fragment>
                     <textarea name={name} placeholder={placeholder} ref={register} ></textarea>
                     {error && (
-                        <p>{error.message}</p>
+                        <p className={classes.errorMessage} >{error.message}</p>
                     )}
                 </Fragment>
             )
@@ -24,7 +32,7 @@ const FormFields = (props) => {
                         })}
                     </select> <br />
                     {error && (
-                        <p>{error.message}</p>
+                        <p className={classes.errorMessage} >{error.message}</p>
                     )}
                 </Fragment>
             )
@@ -39,7 +47,7 @@ const FormFields = (props) => {
                         placeholder={placeholder}
                     />
                     {error && (
-                        <p>{error.message}</p>
+                        <p className={classes.errorMessage} >{error.message}</p>
                     )}
                 </Fragment>
             )

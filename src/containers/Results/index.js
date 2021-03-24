@@ -1,9 +1,26 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import * as _ from 'lodash'
+import { makeStyles } from '@material-ui/core/styles';
 import Card from '../../components/Card'
 
+const useStyles = makeStyles({
+    root: {
+        textAlign: 'center'
+    },
+    inlineBlock: {
+        display: 'inline-block'
+    },
+    block: {
+        display: 'block'
+    },
+    colorGreen: {
+        color: 'green'
+    }
+});
+
 const Results = (props) => {
+    const classes = useStyles();
     const dishesState = useSelector((state) => {
         return state.dishes;
     });
@@ -39,18 +56,18 @@ const Results = (props) => {
     }
 
     return (
-        <div>
+        <div >
             { dishesState.length === 0 ? (
                 <h1> No Dishes Added </h1>
             ) : (
-                <>
+                <div className={classes.block} >
                     { getSortedDishes().map(dish => {
-                        return <div key={dish.dishId} >
-                            {isSelectedByUser(dish) && <p> your selection </p>}
+                        return <div key={dish.dishId} className={classes.inlineBlock} >
+                            {isSelectedByUser(dish) && <p className={classes.colorGreen} > *your selection </p>}
                             <Card dish={dish} isResult />
                         </div>
                     })}
-                </>
+                </div>
             )}
         </div>
     )

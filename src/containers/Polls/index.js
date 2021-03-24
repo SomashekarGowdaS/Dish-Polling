@@ -1,5 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import Button from '@material-ui/core/Button';
 import { startCreatePoll, startEndPoll } from '../../actions/pollActions';
 import AddDish from './AddDish';
 import VoteDishes from './VoteDishes';
@@ -33,12 +34,16 @@ const PollsContainer = (props) => {
                 poll.pollCreated ? (
                     <div>
                         <p> Poll Created </p>
-                        { poll.createdBy === loggedUser.userId && <button onClick={handleEndPoll} > End Poll </button>}
+                        { poll.createdBy === loggedUser.userId && <Button variant="contained" color="secondary" onClick={handleEndPoll} >
+                            End Poll
+                        </Button>}
                         <AddDish />
                     </div>
                 ) : (
                     <div>
-                        <button onClick={handleCreatePoll} > Create Poll </button>
+                        <Button variant="contained" color="secondary" onClick={handleCreatePoll} >
+                            Create Poll
+                        </Button>
                         <p> Create poll to add dishes </p>
                     </div>
                 )
