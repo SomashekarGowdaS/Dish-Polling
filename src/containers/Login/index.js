@@ -13,13 +13,13 @@ const schema = yup.object().shape({
 
 const Login = (props) => {
     const dispatch = useDispatch();
-    const { register, handleSubmit, errors } = useForm({
+    const { register, handleSubmit, errors, control } = useForm({
         resolver: yupResolver(schema),
     });
 
     const formFields = [
-        { type: 'text', name: 'userName', placeholder: 'User Name', register, error: errors.userName ? errors.userName : {} },
-        { type: 'password', name: 'password', placeholder: 'Password', register, error: errors.password ? errors.password : {} }
+        { type: 'text', name: 'userName', placeholder: 'User Name', control, register, error: errors.userName ? errors.userName : {} },
+        { type: 'password', name: 'password', placeholder: 'Password', control, register, error: errors.password ? errors.password : {} }
     ];
 
     const onSubmit = (data) => {

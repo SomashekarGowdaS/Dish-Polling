@@ -17,7 +17,7 @@ const schema = yup.object().shape({
 });
 
 const AddDish = (props) => {
-    const { register, handleSubmit, errors } = useForm({
+    const { register, handleSubmit, errors, control } = useForm({
         resolver: yupResolver(schema),
     });
     const loggedUser = useSelector((state) => {
@@ -41,12 +41,12 @@ const AddDish = (props) => {
     }, [dishes, loggedUser.userId]);
 
     const formFieldsForDishOne = [
-        { type: 'text', name: 'dishOneTitle', placeholder: 'Dish One Title', register, error: errors.dishOneTitle ? errors.dishOneTitle : {} },
+        { type: 'text', name: 'dishOneTitle', placeholder: 'Dish One Title', control, register, error: errors.dishOneTitle ? errors.dishOneTitle : {} },
         { type: 'textarea', name: 'dishOneDescription', placeholder: 'Dish One Description', register, error: errors.dishOneDescription ? errors.dishOneDescription : {} }
     ];
 
     const formFieldsForDishTwo = [
-        { type: 'text', name: 'dishTwoTitle', placeholder: 'Dish Two Title', register, error: errors.dishTwoTitle ? errors.dishTwoTitle : {} },
+        { type: 'text', name: 'dishTwoTitle', placeholder: 'Dish Two Title', control, register, error: errors.dishTwoTitle ? errors.dishTwoTitle : {} },
         { type: 'textarea', name: 'dishTwoDescription', placeholder: 'Dish Two Description', register, error: errors.dishTwoDescription ? errors.dishTwoDescription : {} }
     ];
 

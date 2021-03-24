@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { startUpdateDishes } from '../../../actions/dishesActions';
-import Dish from '../Dish';
 import Card from '../../../components/Card'
 
 const VoteDishes = (props) => {
@@ -99,25 +98,12 @@ const VoteDishes = (props) => {
 
     return (
         <div>
-            <Card />
             { dishes.length === 0 ? (
                 <p> No Dishes Available </p>
             ) : (
                 <div>
                     {dishes.map(dish => {
-                        return <div key={dish.dishId}>
-                            <Dish key={dish.dishId} {...dish} />
-                            {dish.assignedPoint || checkIfVoted(dish) ? <p> {checkIfVoted(dish) || dish.assignedPoint} </p> :
-                                options.length > 0 && !isCurrentUserVoted && (
-                                    <select name="rank" onChange={(e) => {
-                                        handleChange(e.target.value, dish.dishId);
-                                    }}>
-                                        <option value="" hidden >Select</option>
-                                        {options.map(option => {
-                                            return <option key={option.value} value={option.value} > {option.label} </option>
-                                        })}
-                                    </select>)}
-                        </div>
+                        return <Card dish={dish} checkIfVoted={checkIfVoted} options={options} isCurrentUserVoted={isCurrentUserVoted} handleChange={handleChange} />
                     })}
                     <button onClick={() => onSubmit()}>Submit</button>
                     <button onClick={() => toggleEdit()}>Edit</button>

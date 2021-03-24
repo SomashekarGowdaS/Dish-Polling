@@ -1,7 +1,9 @@
 import React, { Fragment } from 'react'
+import { Controller } from "react-hook-form";
+import { Input } from "@material-ui/core";
 
 const FormFields = (props) => {
-    const { type, name, placeholder, register, error, label, options } = props;
+    const { type, name, placeholder, register, error, label, options, control } = props;
     const getField = () => {
         switch (type) {
             case 'textarea': return (
@@ -28,7 +30,14 @@ const FormFields = (props) => {
             )
             default: return (
                 <Fragment>
-                    <input type={type} name={name} placeholder={placeholder} ref={register} />
+                    <Controller
+                        as={Input}
+                        type={type}
+                        name={name}
+                        control={control}
+                        defaultValue=""
+                        placeholder={placeholder}
+                    />
                     {error && (
                         <p>{error.message}</p>
                     )}

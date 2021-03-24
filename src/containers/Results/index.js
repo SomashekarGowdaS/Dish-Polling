@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import * as _ from 'lodash'
-import Dish from '../Polls/Dish/index'
+import Card from '../../components/Card'
 
 const Results = (props) => {
     const dishesState = useSelector((state) => {
@@ -47,7 +47,7 @@ const Results = (props) => {
                     { getSortedDishes().map(dish => {
                         return <div key={dish.dishId} >
                             {isSelectedByUser(dish) && <p> your selection </p>}
-                            <Dish {...dish} isResult />
+                            <Card dish={dish} isResult />
                         </div>
                     })}
                 </>
