@@ -1,16 +1,16 @@
 
-export const startAddDishes = (dishOne, dishTwo) => {
+export const startAddDish = (dish) => {
     return (dispatch, getState) => {
         const dishes = getState().dishes;
-        localStorage.setItem('dishes', JSON.stringify([...dishes, dishOne, dishTwo]));
-        dispatch(addDishes([dishOne, dishTwo]));
+        localStorage.setItem('dishes', JSON.stringify([...dishes, dish]));
+        dispatch(addDish(dish));
     }
 }
 
-export const addDishes = (dishes) => {
+export const addDish = (dish) => {
     return {
-        type: 'ADD_DISHES',
-        payload: dishes
+        type: 'ADD_DISH',
+        payload: dish
     }
 }
 

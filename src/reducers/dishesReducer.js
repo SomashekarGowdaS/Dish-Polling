@@ -2,8 +2,8 @@ const initialState = JSON.parse(localStorage.getItem('dishes')) ? JSON.parse(loc
 
 const dishesReducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'ADD_DISHES': {
-            return [...state, ...action.payload];
+        case 'ADD_DISH': {
+            return [...state, action.payload];
         }
         case 'CLEAR_DISHES': {
             return [...initialState];
